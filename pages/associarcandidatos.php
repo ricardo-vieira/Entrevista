@@ -1,18 +1,4 @@
-<?php require_once '../dao/DAOUsuarios.php'; 
-      require_once '../dao/DAOCandidatos.php';
-      
-      if (isset($_POST['btnlistar'])):
-          $identrevistador = $_POST['selpsico'];
-      endif;
-      
-      if (isset($_POST['btnsalvar'])):
-          $arrayCandidatos = listarCandidatos();
-      
-          foreach ($arrayCandidatos as $itemcandidato):
-              
-          endforeach;
-      endif;
-?>
+<?php require_once '../dao/DAOUsuarios.php'; ?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -27,7 +13,7 @@
             
             <tr>
                 <td colspan="2">
-                    <select name="selpsico" style="width: 300px">
+                    <select style="width: 300px">
                         <?php
                             $arrayentrevistadores = listarUsuarios();
                             foreach ($arrayentrevistadores as $itementrevistador)
@@ -38,39 +24,11 @@
                         ?>
                     </select>
                 </td>
-                <td>
-                    <input type="submit" name="btnlistar" value="Listar" />
-                    <?php
-                        if (isset($_POST['btnlistar'])):
-                            echo '<input type="submit" name="btnsalvar" value="salvar" />';
-                        endif;
-                    ?>
-                </td>
+                <td><input type="submit" value="Listar"</td>
             </tr>
             <tr>
-                <!-- Aqui esta a tabela de informacoes de participantes -->
-            <table>
-                <tr>
-                    <td>Check</td>
-                    <td style="width: 300px">Participante</td>
-                </tr>
-                <?php
-
-                if (isset($_POST['btnlistar'])):
-                    $arraycandidatos = listarCandidatos();
-
-                foreach ($arraycandidatos as $itemcandidato):
-                        $marcado = ($identrevistador == $itemcandidato['ENTREVISTADOR']) ? ("checked") : ("");
-
-                echo "<tr>";
-                    echo '<td><input type="checkbox" name="cboselecionar'.$itemcandidato['ID'].'" value="'.$itemcandidato['ID'].'"'.$marcado.'></input></td>';
-                        echo '<td>'.$itemcandidato["nome"].'</td>';
-                    echo "</tr>";
-                    
-                    endforeach;
-                endif;
-                ?>
-            </table>
+                <td>Check</td>
+                <td colspan="2">Participante</td>
             </tr>
         </table>
             

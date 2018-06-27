@@ -4,14 +4,14 @@ require_once 'conexao.php';
 function listarUsuarios()
 {
     $pdo = conectar();
-
-    try
+    
+    try 
     {
         $querylistar = $pdo->query("SELECT * FROM usuarios");
         $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
-
+        
         return $lista;
-    } catch (Exception $ex)
+    } catch (Exception $ex) 
     {
         echo "Erro: " . $ex->getMessage();
     }
@@ -20,16 +20,16 @@ function listarUsuarios()
 function unicoUsuario($id)
 {
     $pdo = conectar();
-
-    try
+    
+    try 
     {
         $querylistar = $pdo->prepare("SELECT * FROM usuarios where id = ?");
         $querylistar->bindValue(1, $id, PDO::PARAM_INT);
         $querylistar->execute();
         $unico = $querylistar->fetch();
-
+        
         return $unico;
-
+        
     } catch (Exception $ex)
     {
         echo $ex->getMessage();
@@ -39,7 +39,7 @@ function unicoUsuario($id)
 function inserirUsuario($nome, $usuario, $senha, $adm)
 {
     $pdo = conectar();
-
+    
     try
     {
         $queryinserir = $pdo->prepare("INSERT INTO usuarios(nome, usuario, senha, adm) VALUES (?,?,?,?)");
@@ -48,7 +48,7 @@ function inserirUsuario($nome, $usuario, $senha, $adm)
         $queryinserir->bindValue(3, $senha);
         $queryinserir->bindValue(4, $adm);
         $queryinserir->execute();
-
+        
         if ($queryinserir->rowCount() > 0):
                 return true;
         else:
@@ -62,7 +62,7 @@ function inserirUsuario($nome, $usuario, $senha, $adm)
 function atualizarUsuario($id, $nome, $usuario, $senha, $adm)
 {
     $pdo = conectar();
-
+    
     try
     {
         $queryatualizar = $pdo->prepare("UPDATE usuarios SET nome = ?, usuario = ?, senha = ?, adm = ? WHERE id = ?");
@@ -72,7 +72,7 @@ function atualizarUsuario($id, $nome, $usuario, $senha, $adm)
         $queryatualizar->bindValue(4, $adm);
         $queryatualizar->bindValue(5, $id);
         $queryatualizar->execute();
-
+        
         if ($queryatualizar->rowCount() > 0):
                 return true;
         else:
@@ -86,44 +86,19 @@ function atualizarUsuario($id, $nome, $usuario, $senha, $adm)
 function excluirUsuario($id)
 {
     $pdo = conectar();
-
+    
     try
     {
         $queryexcluir = $pdo->prepare("DELETE FROM usuarios WHERE id = ?");
         $queryexcluir->bindValue(1, $id);
         $queryexcluir->execute();
-
+        
         if ($queryexcluir->rowCount() > 0):
                 return true;
         else:
                 return false;
         endif;
     } catch (Exception $ex) {
-        echo "Erro: " . $ex->getMessage();
-    }
-}
-
-function encontraUsuarios($usuario, $senha)
-{
-    $pdo = conectar();
-
-    try
-    {
-//            echo $usuario;
-//            echo $senha;
-        $querylistar = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ? AND senha = ?");
-        $querylistar->bindValue(1,$usuario, PDO::PARAM_STR);
-        $querylistar->bindValue(2,$senha, PDO::PARAM_STR);
-        $querylistar->execute();
-        $lista = $querylistar->fetch();
-//        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
-        if ($querylistar->rowCount() < 1) {
-          return;
-        } else {
-          return $lista;
-        }
-    } catch (Exception $ex)
-    {
         echo "Erro: " . $ex->getMessage();
     }
 }

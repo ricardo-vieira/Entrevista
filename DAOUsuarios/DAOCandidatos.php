@@ -4,37 +4,14 @@ require_once 'conexao.php';
 function listarCandidatos()
 {
     $pdo = conectar();
-
-    try
+    
+    try 
     {
         $querylistar = $pdo->query("SELECT * FROM candidatos");
         $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
-
+        
         return $lista;
-    } catch (Exception $ex)
-    {
-        echo "Erro: " . $ex->getMessage();
-    }
-}
-
-function listarcandidato($Usuario)
-{
-    $pdo = conectar();
-
-    try
-    {
-        if ($Usuario == -1) {
-          $querylistar = $pdo->query("SELECT * FROM candidatos");
-        }
-        else {
-          $querylistar = $pdo->prepare("SELECT * FROM candidatos WHERE ENTREVISTADOR = ?");
-          $querylistar->bindValue(1, $Usuario, PDO::PARAM_INT);
-        }
-        $querylistar->execute();
-        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
-
-        return $lista;
-    } catch (Exception $ex)
+    } catch (Exception $ex) 
     {
         echo "Erro: " . $ex->getMessage();
     }
@@ -43,35 +20,35 @@ function listarcandidato($Usuario)
 function unicoCandidato($id)
 {
     $pdo = conectar();
-
-    try
+    
+    try 
     {
         $querylistar = $pdo->prepare("SELECT * FROM candidatos where id = ?");
         $querylistar->bindValue(1, $id, PDO::PARAM_INT);
         $querylistar->execute();
         $unico = $querylistar->fetch();
-
+        
         return $unico;
-
+        
     } catch (Exception $ex)
     {
         echo $ex->getMessage();
     }
 }
 
-function inserirCandidato($nome, $cpf, $sexo, $matricula, $organizapensamento, $clarezaresposta, $facilexpressao,
-                          $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal,
+function inserirCandidato($nome, $cpf, $sexo, $matricula, $organizapensamento, $clarezaresposta, $facilexpressao, 
+                          $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal, 
                           $medcontinuo, $substanciasintorpecentes, $entrevistador)
 {
     $pdo = conectar();
-
+    
     try
     {
         $queryinserir = $pdo->prepare("INSERT INTO candidatos (NOME, CPF, SEXO, MATRICULA, ORGANIZAPENSAMENTO, CLAREZARESPOSTA, FACILEXPRESSAO,"
                                       . " AUSENGAGUEIRA, VIDAEGRESSA, NIVELMOTIVACAO, RELACIONAMENTOINTERPESSOAL,"
                                       . " MEDCONTINUO, SUBSTANCIASINTORPECENTES, ENTREVISTADOR) "
                                       . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
+        
         $queryinserir->bindValue( 1, $nome);
         $queryinserir->bindValue( 2, $cpf);
         $queryinserir->bindValue( 3, $sexo);
@@ -87,7 +64,7 @@ function inserirCandidato($nome, $cpf, $sexo, $matricula, $organizapensamento, $
         $queryinserir->bindValue(13, $substanciasintorpecentes);
         $queryinserir->bindValue(14, $entrevistador);
         $queryinserir->execute();
-
+        
         if ($queryinserir->rowCount() > 0):
                 return true;
         else:
@@ -99,12 +76,12 @@ function inserirCandidato($nome, $cpf, $sexo, $matricula, $organizapensamento, $
 }
 
 
-function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensamento, $clarezaresposta, $facilexpressao,
-                          $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal,
+function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensamento, $clarezaresposta, $facilexpressao, 
+                          $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal, 
                           $medcontinuo, $substanciasintorpecentes, $entrevistador)
 {
     $pdo = conectar();
-
+    
     try
     {
         $queryatualizar = $pdo->prepare("UPDATE candidatos SET  NOME = ?, CPF = ?, SEXO = ?, MATRICULA = ?, ORGANIZAPENSAMENTO = ?, CLAREZARESPOSTA = ?, FACILEXPRESSAO = ?,"
@@ -127,7 +104,7 @@ function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensam
         $queryatualizar->bindValue(14, $entrevistador);
         $queryatualizar->bindValue(15, $id);
         $queryatualizar->execute();
-
+        
         if ($queryatualizar->rowCount() > 0):
                 return true;
         else:
@@ -141,13 +118,13 @@ function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensam
 function excluirCandidatos($id)
 {
     $pdo = conectar();
-
+    
     try
     {
         $queryexcluir = $pdo->prepare("DELETE FROM candidatos WHERE id = ?");
         $queryexcluir->bindValue(1, $id);
         $queryexcluir->execute();
-
+        
         if ($queryexcluir->rowCount() > 0):
                 return true;
         else:
