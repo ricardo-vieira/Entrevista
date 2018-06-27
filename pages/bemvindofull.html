@@ -1,0 +1,62 @@
+<?php
+
+funcion listarEntrevistadores()
+{
+	$connect = mysql_connect('localhost','root','');
+	$db = mysql_select_db('dbsusipe');
+	$query_select = "SELECT * FROM usuarios";
+	$select = mysql_query($query_select,$connect);
+	$array = mysql_fetch_array($select);
+}
+
+funcion listarCandidatos()
+{
+	$identrevistador = $_POST['cboentrevistador'];
+	$connect = mysql_connect('localhost','id2520344_root','thmpv77d6f');
+	$db = mysql_select_db('id2520344_dbsusipe');
+	$query_select = "SELECT * FROM candidatos WHERE identrevistador = $identrevistador";
+	$select = mysql_query($query_select,$connect);
+	$array = mysql_fetch_array($select);
+
+	return $array;
+}
+
+?>
+<html>
+	<head>
+		<title>Bem vindo</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<meta charset="UTF-8">
+	</head>
+	<style>
+		#containers{
+			margin: 0 auto;
+			width: 80%;
+			height: 500px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#divbemv{
+			width: 500px;
+			border: 1px solid #bdc3c7;
+			padding: 20px;
+			border-radius: 10px;
+		}
+		.centertittle{
+			text-align: center;
+		}
+	</style>
+	<body>
+		<main id="containers">
+		<div id="divbemv" class="container">
+			<h1 class="centertittle">Bem vindo!</h1>
+			<h2 class="centertittle">Escolha uma opção.</h2>
+			<br>
+			<a href="candidatos.html" class="btn btn-primary btn-lg btn-block">Alterar Resultados dos Candidatos</a>
+			<a href="cadastro.html" class="btn btn-primary btn-lg btn-block">Cadastrar Usuários</a>
+			<a href="index.html" class="btn btn-primary btn-lg btn-block">Sair</a>
+		</div>
+		</main>
+	</body>
+</html>
