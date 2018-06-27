@@ -1,11 +1,17 @@
 <?php require_once '../dao/DAOUsuarios.php'; 
       require_once '../dao/DAOCandidatos.php';
       
-      if (isset($_POST['btnlistar'])) 
-      {
-
+      if (isset($_POST['btnlistar'])):
           $identrevistador = $_POST['selpsico'];
-      }
+      endif;
+      
+      if (isset($_POST['btnsalvar'])):
+          $arrayCandidatos = listarCandidatos();
+      
+          foreach ($arrayCandidatos as $itemcandidato):
+              
+          endforeach;
+      endif;
 ?>
 <html>
     <head>
@@ -32,7 +38,14 @@
                         ?>
                     </select>
                 </td>
-                <td><input type="submit" name="btnlistar" value="Listar" /></td>
+                <td>
+                    <input type="submit" name="btnlistar" value="Listar" />
+                    <?php
+                        if (isset($_POST['btnlistar'])):
+                            echo '<input type="submit" name="btnsalvar" value="salvar" />';
+                        endif;
+                    ?>
+                </td>
             </tr>
             <tr>
                 <!-- Aqui esta a tabela de informacoes de participantes -->
@@ -50,8 +63,8 @@
                         $marcado = ($identrevistador == $itemcandidato['ENTREVISTADOR']) ? ("checked") : ("");
 
                 echo "<tr>";
-                    echo '<td><input type="checkbox" value="'.$itemcandidato['ID'].'"'.$marcado.'></input></td>';
-                        echo '<td>'.$itemcandidato["NOME"].'</td>';
+                    echo '<td><input type="checkbox" name="cboselecionar'.$itemcandidato['ID'].'" value="'.$itemcandidato['ID'].'"'.$marcado.'></input></td>';
+                        echo '<td>'.$itemcandidato["nome"].'</td>';
                     echo "</tr>";
                     
                     endforeach;

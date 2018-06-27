@@ -115,7 +115,7 @@ function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensam
     }
 }
 
-function excluirCandidatos($id)
+function excluirCandidato($id)
 {
     $pdo = conectar();
     
@@ -133,4 +133,21 @@ function excluirCandidatos($id)
     } catch (Exception $ex) {
         echo "Erro: " . $ex->getMessage();
     }
+}
+
+
+function atualizarentrevistador($id, $identrevistador)
+{
+        $pdo = conectar();
+        
+        try 
+        {
+        
+        $queryatualizar = $pdo->prepare("UPDATE candidatos SET ENTREVISTADOR = ?"
+                                        . " WHERE ID = ?");
+        $queryatualizar->bindValue( 1, $id);
+        } catch (Exception $ex) {
+            
+        }
+        
 }

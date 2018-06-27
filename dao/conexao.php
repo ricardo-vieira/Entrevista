@@ -4,8 +4,8 @@ function conectar()
 {
 
     $HOST = 'localhost';
-    $USUARIO = 'root';
-    $SENHA = '';
+    $USUARIO = 'gilotech';
+    $SENHA = 'gilotech';
     $BD = 'dbsusipe';
 
     try
