@@ -1,5 +1,5 @@
 <?php
-require_once './conexao.php';
+require_once 'conexao.php';
 
 function listarCandidatos()
 {
@@ -115,7 +115,7 @@ function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensam
     }
 }
 
-function excluirUsuario($id)
+function excluirCandidatos($id)
 {
     $pdo = conectar();
     
