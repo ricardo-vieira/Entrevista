@@ -1,3 +1,8 @@
+<?php
+ require_once '../dao/DAOCandidatos.php';
+ require_once '../dao/DAOUsuarios.php';
+ $IDUsuario = $_COOKIE["ID"];
+?>
 <html>
 	<head>
 		<title>Bem vindo</title>
@@ -26,10 +31,18 @@
 	<body>
 		<main id="containers">
 		<div id="divbemv" class="container">
-			<h1 class="centertittle">Bem vindo <?php echo $login ?>!</h1>
+			<?php
+					$nomeusuario = unicoUsuario($IDUsuario);
+					if($IDUsuario == -1){
+						echo "<h1 class="."centertittle>"."Bem vindo Jorge!"."<h1>";
+					}
+					else{
+						echo "<h1 class="."centertittle> Bem Vindo ".$nomeusuario['NOME']." !<h1>";
+					}
+			?>
 			<br>
-			<a href="candidatosEntrevista.php" class="btn btn-primary btn-lg btn-block">Alterar Resultados dos Candidatos</a>
-			<a href="index.html" class="btn btn-primary btn-lg btn-block">Sair</a>
+			<a href="candidatosEntrevista.php" class="btn btn-primary btn-lg btn-block">Lançar Resultados ou Entrevistas</a>
+			<a href="../index.html" class="btn btn-primary btn-lg btn-block">Sair</a>
 		</div>
 		</main>
 	</body>

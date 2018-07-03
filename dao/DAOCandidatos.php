@@ -40,6 +40,24 @@ function listarcandidato($Usuario)
     }
 }
 
+function listarcandidatoCidade($Cidade)
+{
+    $pdo = conectar();
+
+    try
+    {
+        $querylistar = $pdo->prepare("SELECT * FROM candidatos WHERE cidade = ?");
+        $querylistar->bindValue(1, $Cidade, PDO::PARAM_STR);
+        $querylistar->execute();
+        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+    } catch (Exception $ex)
+    {
+        echo "Erro: " . $ex->getMessage();
+    }
+}
+
 function unicoCandidato($id)
 {
     $pdo = conectar();
@@ -58,6 +76,32 @@ function unicoCandidato($id)
         echo $ex->getMessage();
     }
 }
+
+function CandidatoInscricao($Usuario, $Inscricao)
+{
+    $pdo = conectar();
+
+    try
+    {
+        IF ($Usuario == -1) {
+          $querylistar = $pdo->prepare("SELECT * FROM candidatos where inscricao = ?");
+        }
+        else {
+          $querylistar = $pdo->prepare("SELECT * FROM candidatos where inscricao = ? AND (ENTREVISTADOR IS NULL OR ENTREVISTADOR = ?)");
+          $querylistar->bindValue(2, $Usuario, PDO::PARAM_INT);
+        }
+        $querylistar->bindValue(1, $Inscricao, PDO::PARAM_INT);
+        $querylistar->execute();
+        $unico = $querylistar->fetch();
+
+        return $unico;
+
+    } catch (Exception $ex)
+    {
+        echo $ex->getMessage();
+    }
+}
+
 
 function inserirCandidato($nome, $cpf, $sexo, $matricula, $organizapensamento, $clarezaresposta, $facilexpressao,
                           $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal,
@@ -99,33 +143,30 @@ function inserirCandidato($nome, $cpf, $sexo, $matricula, $organizapensamento, $
 }
 
 
-function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensamento, $clarezaresposta, $facilexpressao,
+function atualizarCandidato($id, $organizapensamento, $clarezaresposta, $facilexpressao,
                           $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal,
-                          $medcontinuo, $substanciasintorpecentes, $entrevistador)
+                          $medcontinuo, $substanciasintorpecentes, $entrevistador, $Resultado)
 {
     $pdo = conectar();
 
     try
     {
-        $queryatualizar = $pdo->prepare("UPDATE candidatos SET  NOME = ?, CPF = ?, SEXO = ?, MATRICULA = ?, ORGANIZAPENSAMENTO = ?, CLAREZARESPOSTA = ?, FACILEXPRESSAO = ?,"
+        $queryatualizar = $pdo->prepare("UPDATE candidatos SET ORGANIZAPENSAMENTO = ?, CLAREZARESPOSTA = ?, FACILEXPRESSAO = ?,"
                                         . " AUSENGAGUEIRA = ?, VIDAEGRESSA = ?, NIVELMOTIVACAO = ?, RELACIONAMENTOINTERPESSOAL = ?, MEDCONTINUO = ?,"
-                                        . " SUBSTANCIASINTORPECENTES = ?, ENTREVISTADOR"
+                                        . " SUBSTANCIASINTORPECENTES = ?, ENTREVISTADOR = ?, RESULTADO = ?"
                                         . " WHERE ID = ?");
-        $queryatualizar->bindValue( 1, $nome);
-        $queryatualizar->bindValue( 2, $cpf);
-        $queryatualizar->bindValue( 3, $sexo);
-        $queryatualizar->bindValue( 4, $matricula);
-        $queryatualizar->bindValue( 5, $organizapensamento);
-        $queryatualizar->bindValue( 6, $clarezaresposta);
-        $queryatualizar->bindValue( 7, $facilexpressao);
-        $queryatualizar->bindValue( 8, $ausenciagagueira);
-        $queryatualizar->bindValue( 9, $vidaegressa);
-        $queryatualizar->bindValue(10, $nivelmotivacao);
-        $queryatualizar->bindValue(11, $relacionamentointerpesssoal);
-        $queryatualizar->bindValue(12, $medcontinuo);
-        $queryatualizar->bindValue(13, $substanciasintorpecentes);
-        $queryatualizar->bindValue(14, $entrevistador);
-        $queryatualizar->bindValue(15, $id);
+        $queryatualizar->bindValue( 1, $organizapensamento);
+        $queryatualizar->bindValue( 2, $clarezaresposta);
+        $queryatualizar->bindValue( 3, $facilexpressao);
+        $queryatualizar->bindValue( 4, $ausenciagagueira);
+        $queryatualizar->bindValue( 5, $vidaegressa);
+        $queryatualizar->bindValue( 6, $nivelmotivacao);
+        $queryatualizar->bindValue( 7, $relacionamentointerpesssoal);
+        $queryatualizar->bindValue( 8, $medcontinuo);
+        $queryatualizar->bindValue( 9, $substanciasintorpecentes);
+        $queryatualizar->bindValue(10, $entrevistador);
+        $queryatualizar->bindValue(11, $Resultado, PDO::PARAM_INT);
+        $queryatualizar->bindValue(12, $id);
         $queryatualizar->execute();
 
         if ($queryatualizar->rowCount() > 0):
@@ -136,6 +177,15 @@ function atualizarCandidato($id, $nome, $cpf, $sexo, $matricula, $organizapensam
     } catch (Exception $ex) {
         echo "Erro: " . $ex->getMessage();
     }
+}
+
+function DefinirResultado ($organizapensamento, $clarezaresposta, $facilexpressao,
+                           $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal,
+                           $medcontinuo, $substanciasintorpecentes) {
+  if ((!$ausenciagagueira) || (!$substanciasintorpecentes)) {
+    return false;
+  }
+  return true;
 }
 
 function excluirCandidatos($id)

@@ -16,15 +16,23 @@
 		}
 	</style>
 	<body>
-		<form class="px-4 py-3" method="POST" action="candidatosEntrevista.php">
+		<form class="px-4 py-3" method="POST" action="cadastro.php">
 			<div id="divcadusu" class="container">
 			<h1 class="certertittles">Cadastro de Usuários</h1>
 			<label for="USUARIO"><b>Login:</b>&nbsp;</label>
 			<input class="form-control" type="text" name="txtUsuario" required="" id="USUARIO"><br>
-			<label  for="NOME"><b>Nome:</b>&nbsp;</label>
-			<input class="form-control" type="text" name="txtNome" required="" id="NOME"><br>
 			<label for="SENHA"><b>Senha:</b>&nbsp;</label>
 			<input class="form-control" type="password" name="txtSenha" required="" id="SENHA"><br>
+			<label  for="NOME"><b>Nome:</b>&nbsp;</label>
+			<input class="form-control" type="text" name="txtNome" required="" id="NOME"><br>
+			<label  for="telefone"><b>Telefone:</b>&nbsp;</label>
+			<input class="form-control" type="tel" name="txttelefone" required="" id="telefone"><br>
+			<label  for="email"><b>Email:</b>&nbsp;</label>
+			<input class="form-control" type="email" name="txtemail" required="" id="email"><br>
+			<label  for="crp"><b>CRP:</b>&nbsp;</label>
+			<input class="form-control" type="text" name="txtcrp" required="" id="crp"><br>
+			<label  for="cpf"><b>CPF:</b>&nbsp;</label>
+			<input class="form-control" type="text" name="txtcpf" required="" id="cpf"><br>
 			<input type="submit" value="Cadastrar" id="cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block">
 			<a href="bemvindofull.html" class="btn btn-primary btn-lg btn-block">Voltar</a>
 			<a href="index.html" class="btn btn-primary btn-lg btn-block">Sair</a>

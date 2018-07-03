@@ -36,17 +36,20 @@ function unicoUsuario($id)
     }
 }
 
-function inserirUsuario($nome, $usuario, $senha, $adm)
+function inserirUsuario($nome, $usuario, $senha, $telefone, $email, $crp, $cpf)
 {
     $pdo = conectar();
 
     try
     {
-        $queryinserir = $pdo->prepare("INSERT INTO usuarios(nome, usuario, senha, adm) VALUES (?,?,?,?)");
+        $queryinserir = $pdo->prepare("INSERT INTO usuarios(nome, usuario, senha,telefone, email, crp, cpf) VALUES (?,?,?,?,?,?,?)");
         $queryinserir->bindValue(1, $nome);
         $queryinserir->bindValue(2, $usuario);
         $queryinserir->bindValue(3, $senha);
-        $queryinserir->bindValue(4, $adm);
+        $queryinserir->bindValue(4, $telefone);
+        $queryinserir->bindValue(5, $email);
+        $queryinserir->bindValue(6, $crp);
+        $queryinserir->bindValue(7, $cpf);
         $queryinserir->execute();
 
         if ($queryinserir->rowCount() > 0):
@@ -59,18 +62,22 @@ function inserirUsuario($nome, $usuario, $senha, $adm)
     }
 }
 
-function atualizarUsuario($id, $nome, $usuario, $senha, $adm)
+function atualizarUsuario($id, $nome, $usuario, $senha,$telefone, $email, $crp, $cpf, $adm)
 {
     $pdo = conectar();
 
     try
     {
-        $queryatualizar = $pdo->prepare("UPDATE usuarios SET nome = ?, usuario = ?, senha = ?, adm = ? WHERE id = ?");
+        $queryatualizar = $pdo->prepare("UPDATE usuarios SET nome = ?, usuario = ?, senha = ?, adm = ?, telefone = ?, email = ?, crp = ?, cpf = ? WHERE id = ?");
         $queryatualizar->bindValue(1, $nome);
         $queryatualizar->bindValue(2, $usuario);
         $queryatualizar->bindValue(3, $senha);
         $queryatualizar->bindValue(4, $adm);
-        $queryatualizar->bindValue(5, $id);
+        $queryatualizar->bindValue(5, $telefone);
+        $queryatualizar->bindValue(6, $email);
+        $queryatualizar->bindValue(7, $crp);
+        $queryatualizar->bindValue(8, $cpf);
+        $queryatualizar->bindValue(9, $id);
         $queryatualizar->execute();
 
         if ($queryatualizar->rowCount() > 0):
