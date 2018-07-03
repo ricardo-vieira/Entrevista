@@ -1,7 +1,5 @@
 <?php
   require_once '../dao/DAOUsuarios.php';
-//      echo $_POST['txtUsuario'];
-//      echo $_POST['txtSenha'];
       $ArrayUsuarios = encontraUsuarios($_POST['txtUsuario'], $_POST['txtSenha']);
 
         if ($ArrayUsuarios == NULL){
@@ -11,12 +9,11 @@
           if($ArrayUsuarios['ADM'] == 1){
           setcookie("USUARIO",$_POST['txtUsuario']);
           setcookie("ID",-1);
-          header("Location:bemvindofull.html");
+          header("Location:bemvindofull.php");
         }else{
           setcookie("USUARIO",$_POST['txtUsuario']);
-          setcookie("ID",$ArrayUsuarios['ID']);
-          header("Location:bemvindo.html");
+          setcookie("ID", $ArrayUsuarios['ID']);
+          header("Location:bemvindo.php");
         }
       }
-
 ?>
