@@ -98,7 +98,7 @@
 								echo  "<input type=\"hidden\" name=\"HDIDCandidatoEditar\" value=\"".$CandidatoEditar['ID']."\"/>";
 								echo "<tr><th scope=\"row\">".utf8_encode($CandidatoEditar['nome'])."</th><td>".$CandidatoEditar['inscricao']."</td><td>".$CandidatoEditar['cpf']."</td>";
 
-                echo "<td><select name=\"OP\" class=\"form-control\" style=\"line-height:\">
+                echo "<td><select name=\"OP\" class=\"form-control form-control-lg\" style=\"line-height:\">
   								<option value = 0 >Inapto</option>
 		              <option value = 1 ".$selectedorganizapensamento.">Apto</option>
 		            </select>
@@ -110,7 +110,7 @@
 		                })
 		              </script>
 		                </td>";
-										echo "<td><select name=\"CR\" class=\"form-control\">
+										echo "<td><select name=\"CR\" class=\"form-control form-control-lg\">
   										<option value = 0 >Inapto</option>
 				              <option value = 1 ".$selectedclarezaresposta.">Apto</option>
 				            </select>
@@ -122,7 +122,7 @@
 				                })
 				              </script>
 				                </td>";
-				            echo "<td><select name=\"FE\" class=\"form-control\">
+				            echo "<td><select name=\"FE\" class=\"form-control form-control-lg\">
   										<option value = 0 >Inapto</option>
 				              <option value = 1 ".$selectedfacilexpressao.">Apto</option>
 				            </select>
@@ -134,7 +134,7 @@
 				                })
 				              </script>
 				                </td>";
-				            echo "<td><select name=\"AG\" class=\"form-control\">
+				            echo "<td><select name=\"AG\" class=\"form-control form-control-lg\">
 				              <option value = 0 >Inapto</option>
 											<option value = 1 ".$selectedausenciagagueira.">Apto</option>
 				            </select>
@@ -146,7 +146,7 @@
 				                })
 				              </script>
 				                </td>";
-				            echo "<td><select name=\"VE\" class=\"form-control\">
+				            echo "<td><select name=\"VE\" class=\"form-control form-control-lg\">
 				              <option value = 0 >Inapto</option>
 											<option value = 1 ".$selectedvidaegressa.">Apto</option>
 				            </select>
@@ -158,7 +158,7 @@
 				                })
 				              </script>
 				                </td>";
-				            echo "<td><select name=\"NM\" class=\"form-control\">
+				            echo "<td><select name=\"NM\" class=\"form-control form-control-lg\">
 				              <option value = 0 >Inapto</option>
 											<option value = 1 ".$selectednivelmotivacao.">Apto</option>
 				            </select>
@@ -170,7 +170,7 @@
 				                })
 				              </script>
 				                </td>";
-				            echo "<td><select name=\"RI\" class=\"form-control\">
+				            echo "<td><select name=\"RI\" class=\"form-control form-control-lg\">
 				              <option value = 0 >Inapto</option>
 											<option value = 1 ".$selectedrelacionamentointerpesssoal.">Apto</option>
 				            </select>
@@ -182,7 +182,7 @@
 				                })
 				              </script>
 				                </td>";
-				            echo "<td><select name=\"MC\" class=\"form-control\">
+				            echo "<td><select name=\"MC\" class=\"form-control form-control-lg\">
 				              <option value = 0 >Inapto</option>
 											<option value = 1 ".$selectedmedcontinuo.">Apto</option>
 				            </select>
@@ -194,7 +194,7 @@
 				                })
 				              </script>
 				                </td>";
-				            echo "<td><select name=\"SE\" class=\"form-control\">
+				            echo "<td><select name=\"SE\" class=\"form-control form-control-lg\">
 				              <option value = 0 >Inapto</option>
 											<option value = 1 ".$selectedsubstanciasintorpecentes.">Apto</option>
 				            </select>
