@@ -134,3 +134,19 @@ function encontraUsuarios($usuario, $senha)
         echo "Erro: " . $ex->getMessage();
     }
 }
+
+function listarEntrevistadores()
+{
+    $pdo = conectar();
+
+    try
+    {
+        $querylistar = $pdo->query("SELECT * FROM usuarios where usuarios.id <> -1");
+        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+    } catch (Exception $ex)
+    {
+        echo "Erro: " . $ex->getMessage();
+    }
+}

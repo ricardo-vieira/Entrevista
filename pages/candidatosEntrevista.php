@@ -38,7 +38,7 @@ hr {
         <h4 align="right">Usuário: Jorge<h4><?php }
         else{ ?>
           <h4 align="right">Usuário: <?php echo $nomeusuario['NOME'] ?><h4>
-      <?php }?>
+          <?php }?>
 
           <h1 class="certertittlescand"><CENTER>Relação de Entrevistas Realizadas</CENTER></h1>
           <div class="input-group">
@@ -203,7 +203,9 @@ hr {
           if ($IDUsuario == -1) {?>
             <div class="form">
               <label for="cidade">Cidade:</label>
+
               <select class="form" style="width:200px" name="selectFiltroCidade">
+                <option value="">  Todas </option>
                 <option value="Altamira">  Altamira </option>
                 <option value="Belem">     Belém    </option>
                 <option value="Castanhal"> Castanhal</option>
@@ -211,7 +213,18 @@ hr {
                 <option value="Maraba">    Marabá   </option>
                 <option value="Santarem">  Santarém </option>
               </select>
-              <input type="submit" name="btnPesquisarCidade" class="btn btn-primary btn-lg" value="Pesquisar"/>
+
+              <label for="cidade">Entrevistador:</label>
+
+              <select class="form" style="width:200px" name="selectFiltroEntrevistador">
+                <option value=-1 selected>Todos</option>
+                <?php
+                $arrayEntrevistadores = listarEntrevistadores();
+                foreach ($arrayEntrevistadores as $itementrevistador) { ?>
+                  <option value=<?php echo $itementrevistador['ID'] ?>><?php echo $itementrevistador['NOME'] ?></option>
+                <?php } ?>
+              </select>
+              <input type="submit" name="btnFiltroPesquisar" class="btn btn-primary btn-lg" value="Pesquisar"/>
             </div>
           <?php }
           ?>
@@ -245,14 +258,15 @@ hr {
 
               //Parametros de filtragem;
               $filtroCidade = "";
-              $filtroIdUsuario = $IDUsuario;
+              $filtroEntrevistador = $IDUsuario;
 
-              if (isset ($_POST["btnPesquisarCidade"]))
+              if (isset ($_POST["btnFiltroPesquisar"]))
               {
-                $filtroCidade = $_POST["selectFiltroCidade"];
+                $filtroCidade        = $_POST["selectFiltroCidade"];
+                $filtroEntrevistador = $_POST['selectFiltroEntrevistador'];
               }
 
-              $arrayCandidatos = listarCandidatos($filtroCidade, $filtroIdUsuario);
+              $arrayCandidatos = listarCandidatos($filtroCidade, $filtroEntrevistador);
 
               foreach ($arrayCandidatos as $itemcandidato)
               {
