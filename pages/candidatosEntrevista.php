@@ -98,8 +98,8 @@ hr {
 
                   <input type="hidden" name="HDIDCandidatoEditar" value=<?php echo $CandidatoEditar['ID'] ?>/>
                   <th scope="row"><?php echo utf8_encode($CandidatoEditar['nome']) ?></th>
-                  <td><?php echo $CandidatoEditar['inscricao'] ?></td>
-                  <td><?php echo $CandidatoEditar['cpf'] ?></td>
+                  <td style="text-align: center"><?php echo $CandidatoEditar['inscricao'] ?></td>
+                  <td style="text-align: center"><?php echo $CandidatoEditar['cpf'] ?></td>
                   <td>
                     <select name="selectOP" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
