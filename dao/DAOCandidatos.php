@@ -151,23 +151,44 @@ function atualizarCandidato($id, $organizapensamento, $clarezaresposta, $facilex
 
     try
     {
-        $queryatualizar = $pdo->prepare("UPDATE candidatos SET ORGANIZAPENSAMENTO = ?, CLAREZARESPOSTA = ?, FACILEXPRESSAO = ?,"
-                                        . " AUSENGAGUEIRA = ?, VIDAEGRESSA = ?, NIVELMOTIVACAO = ?, RELACIONAMENTOINTERPESSOAL = ?, MEDCONTINUO = ?,"
-                                        . " SUBSTANCIASINTORPECENTES = ?, ENTREVISTADOR = ?, RESULTADO = ?"
-                                        . " WHERE ID = ?");
-        $queryatualizar->bindValue( 1, $organizapensamento);
-        $queryatualizar->bindValue( 2, $clarezaresposta);
-        $queryatualizar->bindValue( 3, $facilexpressao);
-        $queryatualizar->bindValue( 4, $ausenciagagueira);
-        $queryatualizar->bindValue( 5, $vidaegressa);
-        $queryatualizar->bindValue( 6, $nivelmotivacao);
-        $queryatualizar->bindValue( 7, $relacionamentointerpesssoal);
-        $queryatualizar->bindValue( 8, $medcontinuo);
-        $queryatualizar->bindValue( 9, $substanciasintorpecentes);
-        $queryatualizar->bindValue(10, $entrevistador);
-        $queryatualizar->bindValue(11, $Resultado, PDO::PARAM_INT);
-        $queryatualizar->bindValue(12, $id);
-        $queryatualizar->execute();
+      $queryString = "UPDATE candidatos SET ORGANIZAPENSAMENTO = :organizacaopensamento,"
+                                         . "CLAREZARESPOSTA = :clarezaresposta,"
+                                         . "FACILEXPRESSAO = :facilexpressao,"
+                                         . "AUSENGAGUEIRA = :ausenciagagueira,"
+                                         . "VIDAEGRESSA = :vidaegressa,"
+                                         . "NIVELMOTIVACAO = :nivelmotivacao,"
+                                         . "RELACIONAMENTOINTERPESSOAL = :relacionamentointerpessoal,"
+                                         . "MEDCONTINUO = :medcontinuo,"
+                                         . "SUBSTANCIASINTORPECENTES = :substanciasintorpecentes,"
+                                         . "RESULTADO = :resultado";
+
+    if ($entrevistador != -1){
+      $queryString = $queryString. ", ENTREVISTADOR = :entrevistador";
+    }
+
+      echo "entrevistador => ".$entrevistador;
+
+      $queryString = $queryString." WHERE ID = :id";
+
+
+      $queryatualizar = $pdo->prepare($queryString);
+
+      $queryatualizar->bindValue(':organizacaopensamento', $organizapensamento, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':clarezaresposta', $clarezaresposta, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':facilexpressao', $facilexpressao, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':ausenciagagueira', $ausenciagagueira, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':vidaegressa', $vidaegressa, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':nivelmotivacao', $nivelmotivacao, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':relacionamentointerpessoal', $relacionamentointerpesssoal, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':medcontinuo', $medcontinuo, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':substanciasintorpecentes', $substanciasintorpecentes, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':resultado', $Resultado, PDO::PARAM_INT);
+      $queryatualizar->bindValue(':id', $id, PDO::PARAM_INT);
+
+      if ($entrevistador != -1)
+        $queryatualizar->bindValue(':entrevistador', $entrevistador);
+
+      $queryatualizar->execute();
 
         if ($queryatualizar->rowCount() > 0):
                 return true;
