@@ -38,7 +38,7 @@ hr {
         <h4 align="right">Usuário: Jorge<h4><?php }
         else{ ?>
           <h4 align="right">Usuário: <?php echo $nomeusuario['NOME'] ?><h4>
-      <?php }?>
+          <?php }?>
 
           <h1 class="certertittlescand"><CENTER>Relação de Entrevistas Realizadas</CENTER></h1>
           <div class="input-group">
@@ -61,7 +61,7 @@ hr {
             $CandidatoEditar = CandidatoInscricao($IDUsuario, $Inscricao);
 
             if ($CandidatoEditar == NULL) {
-              echo"<script language='javascript' type='text/javascript'>alert('Inscricao não existente!');</script>";
+              echo"<script language='javascript' type='text/javascript'>alert('Inscrição não existente!');</script>";
             }
             else { ?>
               <table class="table table-striped" style="width: 100%">
@@ -101,53 +101,53 @@ hr {
                   <td><?php echo $CandidatoEditar['inscricao'] ?></td>
                   <td><?php echo $CandidatoEditar['cpf'] ?></td>
                   <td>
-                    <select name="selectOP" class="form-control">
+                    <select name="selectOP" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedorganizapensamento ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectCR" class="form-control">
+                    <select name="selectCR" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedclarezaresposta ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectFE" class="form-control">
+                    <select name="selectFE" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedfacilexpressao ?>>Apto</option>
                     </td>
                     <td>
-                      <select name="selectAG" class="form-control">
+                      <select name="selectAG" class="form-control form-control-lg">
                         <option value = 0 >Inapto</option>
                         <option value = 1 <?php echo $selectedausenciagagueira ?>>Apto</option>
                       </select>
                     </td>
-                    <td><select name="selectVE" class="form-control">
+                    <td><select name="selectVE" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedvidaegressa ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectNM" class="form-control">
+                    <select name="selectNM" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectednivelmotivacao ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectRI" class="form-control">
+                    <select name="selectRI" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedrelacionamentointerpesssoal ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectMC" class="form-control">
+                    <select name="selectMC" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedmedcontinuo ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectSE" class="form-control">
+                    <select name="selectSE" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedsubstanciasintorpecentes ?>>Apto</option>
                     </select>
@@ -182,7 +182,7 @@ hr {
 
               if ($CandidatoAtualizado) { ?>
                 <script language='javascript' type='text/javascript'>
-                alert('Inscricao Atualizada!');
+                alert('Inscrição Atualizada!');
                 </script>
 
               <?php } else { ?>
@@ -203,7 +203,9 @@ hr {
           if ($IDUsuario == -1) {?>
             <div class="form">
               <label for="cidade">Cidade:</label>
-              <select class="form" style="width:200px" name="cidade">
+
+              <select class="form" style="width:200px" name="selectFiltroCidade">
+                <option value="">  Todas </option>
                 <option value="Altamira">  Altamira </option>
                 <option value="Belem">     Belém    </option>
                 <option value="Castanhal"> Castanhal</option>
@@ -211,7 +213,18 @@ hr {
                 <option value="Maraba">    Marabá   </option>
                 <option value="Santarem">  Santarém </option>
               </select>
-              <input type="submit" name="btnPesquisarCidade" class="btn btn-primary btn-lg" value="Pesquisar"/>
+
+              <label for="cidade">Entrevistador:</label>
+
+              <select class="form" style="width:200px" name="selectFiltroEntrevistador">
+                <option value=-1 selected>Todos</option>
+                <?php
+                $arrayEntrevistadores = listarEntrevistadores();
+                foreach ($arrayEntrevistadores as $itementrevistador) { ?>
+                  <option value=<?php echo $itementrevistador['ID'] ?>><?php echo $itementrevistador['NOME'] ?></option>
+                <?php } ?>
+              </select>
+              <input type="submit" name="btnFiltroPesquisar" class="btn btn-primary btn-lg" value="Pesquisar"/>
             </div>
           <?php }
           ?>
@@ -220,7 +233,7 @@ hr {
           <table class="table table-striped" style="width:100%">
             <thead>
               <tr>
-                <th scope="col" style="text-align: center; width:15%">Nome</th>
+                <th scope="col" style="text-align: center; width:20%">Nome</th>
                 <th scope="col" style="text-align: center">Inscrição</th>
                 <th scope="col" style="text-align: center">CPF</th>
                 <th scope="col" style="text-align: center">Cidade</th>
@@ -235,20 +248,26 @@ hr {
                 <th scope="col" style="text-align: center">Substâncias Entorpecentes</th>
 
                 <?php if ($IDUsuario == -1) {?>
-                  <th scope="col" style="text-align: center">Psicologo</th>
+                  <th scope="col" style="text-align: center; width:10%">Entrevistador</th>
                   <th scope="col" style="text-align: center">Resultado</th>
                 <?php }?>
               </tr>
             </thead>
             <tbody>
               <?php
-              if (isset ($_POST["btnPesquisarCidade"])) {
-                $Cidade = $_POST["cidade"];
-                $arrayCandidatos = listarcandidatoCidade($Cidade);
+
+              //Parametros de filtragem;
+              $filtroCidade = "";
+              $filtroEntrevistador = $IDUsuario;
+
+              if (isset ($_POST["btnFiltroPesquisar"]))
+              {
+                $filtroCidade        = $_POST["selectFiltroCidade"];
+                $filtroEntrevistador = $_POST['selectFiltroEntrevistador'];
               }
-              else {
-                $arrayCandidatos = listarcandidato($IDUsuario);
-              }
+
+              $arrayCandidatos = listarCandidatos($filtroCidade, $filtroEntrevistador);
+
               foreach ($arrayCandidatos as $itemcandidato)
               {
                 $organizapensamento  					= ($itemcandidato['ORGANIZAPENSAMENTO']==1)?("Apto"):("Inapto");
@@ -279,7 +298,7 @@ hr {
                   <td style="text-align: center"><?php echo $substanciasintorpecentes ?></td>
 
                   <?php if ($IDUsuario == -1)	{ ?>
-                    <td style="text-align: center"><?php echo "Vai Aqui o Psicologo" ?></td>
+                    <td style="text-align: center"><?php echo $itemcandidato['NOMEENTREVISTADOR'] ?></td>
                     <td style="text-align: center"><?php echo $aprovado ?></td>
                   <?php } ?>
                 </tr>
