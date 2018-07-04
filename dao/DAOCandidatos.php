@@ -1,17 +1,46 @@
 <?php
 require_once 'conexao.php';
 
-function listarCandidatos()
+function listarCandidatos($cidade, $idusuario)
 {
     $pdo = conectar();
 
     try
     {
-        $querylistar = $pdo->query("SELECT * FROM candidatos");
+        $queryString = 'SELECT candidatos.*, usuarios.nome NOMEENTREVISTADOR'
+                      .' FROM candidatos LEFT JOIN'
+                      .' usuarios ON candidatos.entrevistador = usuarios.ID';
+
+        $possuiClausula = false;
+
+        if ($cidade != ""){
+            $queryString = $queryString.($possuiClausula ? ' AND ' : ' WHERE ').' candidatos.cidade = :cidade';
+            $possuiClausula = true;
+        }
+
+        if ($idusuario > 0){
+            $queryString = $queryString.($possuiClausula ? ' AND ' : ' WHERE ').' candidatos.entrevistador = :usuario';
+            $possuiClausula = true;
+        }
+
+
+        $querylistar = $pdo->prepare($queryString);
+
+
+        if ($cidade != "")
+          $querylistar->bindValue(':cidade', $cidade, PDO::PARAM_STR);
+
+        if ($idusuario >= 1)
+        {
+          $querylistar->bindValue(':usuario', $idusuario, PDO::PARAM_INT);
+        }
+
+        $querylistar->execute();
         $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
 
         return $lista;
-    } catch (Exception $ex)
+    }
+    catch (Exception $ex)
     {
         echo "Erro: " . $ex->getMessage();
     }

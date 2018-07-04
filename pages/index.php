@@ -3,7 +3,7 @@
       $ArrayUsuarios = encontraUsuarios($_POST['txtUsuario'], $_POST['txtSenha']);
 
         if ($ArrayUsuarios == NULL){
-          echo"<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='index.html';</script>";
+          echo"<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='../index.html';</script>";
           die();
         }else{
           if($ArrayUsuarios['ADM'] == 1){

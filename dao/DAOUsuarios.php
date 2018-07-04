@@ -116,19 +116,32 @@ function encontraUsuarios($usuario, $senha)
 
     try
     {
-//            echo $usuario;
-//            echo $senha;
         $querylistar = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ? AND senha = ?");
         $querylistar->bindValue(1,$usuario, PDO::PARAM_STR);
         $querylistar->bindValue(2,$senha, PDO::PARAM_STR);
         $querylistar->execute();
         $lista = $querylistar->fetch();
-//        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
         if ($querylistar->rowCount() < 1) {
           return;
         } else {
           return $lista;
         }
+    } catch (Exception $ex)
+    {
+        echo "Erro: " . $ex->getMessage();
+    }
+}
+
+function listarEntrevistadores()
+{
+    $pdo = conectar();
+
+    try
+    {
+        $querylistar = $pdo->query("SELECT * FROM usuarios where usuarios.id <> -1");
+        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
     } catch (Exception $ex)
     {
         echo "Erro: " . $ex->getMessage();
