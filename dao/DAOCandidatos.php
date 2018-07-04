@@ -166,8 +166,6 @@ function atualizarCandidato($id, $organizapensamento, $clarezaresposta, $facilex
       $queryString = $queryString. ", ENTREVISTADOR = :entrevistador";
     }
 
-      echo "entrevistador => ".$entrevistador;
-
       $queryString = $queryString." WHERE ID = :id";
 
 
