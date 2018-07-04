@@ -116,14 +116,11 @@ function encontraUsuarios($usuario, $senha)
 
     try
     {
-//            echo $usuario;
-//            echo $senha;
         $querylistar = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ? AND senha = ?");
         $querylistar->bindValue(1,$usuario, PDO::PARAM_STR);
         $querylistar->bindValue(2,$senha, PDO::PARAM_STR);
         $querylistar->execute();
         $lista = $querylistar->fetch();
-//        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
         if ($querylistar->rowCount() < 1) {
           return;
         } else {

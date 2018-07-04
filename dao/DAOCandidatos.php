@@ -69,6 +69,24 @@ function listarcandidato($Usuario)
     }
 }
 
+function listarcandidatoCidade($Cidade)
+{
+    $pdo = conectar();
+
+    try
+    {
+        $querylistar = $pdo->prepare("SELECT * FROM candidatos WHERE cidade = ?");
+        $querylistar->bindValue(1, $Cidade, PDO::PARAM_STR);
+        $querylistar->execute();
+        $lista = $querylistar->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+    } catch (Exception $ex)
+    {
+        echo "Erro: " . $ex->getMessage();
+    }
+}
+
 function unicoCandidato($id)
 {
     $pdo = conectar();
@@ -176,8 +194,6 @@ function atualizarCandidato($id, $organizapensamento, $clarezaresposta, $facilex
     if ($entrevistador != -1){
       $queryString = $queryString. ", ENTREVISTADOR = :entrevistador";
     }
-
-      echo "entrevistador => ".$entrevistador;
 
       $queryString = $queryString." WHERE ID = :id";
 

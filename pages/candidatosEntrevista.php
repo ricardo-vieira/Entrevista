@@ -61,7 +61,7 @@ hr {
             $CandidatoEditar = CandidatoInscricao($IDUsuario, $Inscricao);
 
             if ($CandidatoEditar == NULL) {
-              echo"<script language='javascript' type='text/javascript'>alert('Inscricao não existente!');</script>";
+              echo"<script language='javascript' type='text/javascript'>alert('Inscrição não existente!');</script>";
             }
             else { ?>
               <table class="table table-striped" style="width: 100%">
@@ -98,56 +98,56 @@ hr {
 
                   <input type="hidden" name="HDIDCandidatoEditar" value=<?php echo $CandidatoEditar['ID'] ?>/>
                   <th scope="row"><?php echo utf8_encode($CandidatoEditar['nome']) ?></th>
-                  <td><?php echo $CandidatoEditar['inscricao'] ?></td>
-                  <td><?php echo $CandidatoEditar['cpf'] ?></td>
+                  <td style="text-align: center"><?php echo $CandidatoEditar['inscricao'] ?></td>
+                  <td style="text-align: center"><?php echo $CandidatoEditar['cpf'] ?></td>
                   <td>
-                    <select name="selectOP" class="form-control">
+                    <select name="selectOP" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedorganizapensamento ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectCR" class="form-control">
+                    <select name="selectCR" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedclarezaresposta ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectFE" class="form-control">
+                    <select name="selectFE" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedfacilexpressao ?>>Apto</option>
                     </td>
                     <td>
-                      <select name="selectAG" class="form-control">
+                      <select name="selectAG" class="form-control form-control-lg">
                         <option value = 0 >Inapto</option>
                         <option value = 1 <?php echo $selectedausenciagagueira ?>>Apto</option>
                       </select>
                     </td>
-                    <td><select name="selectVE" class="form-control">
+                    <td><select name="selectVE" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedvidaegressa ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectNM" class="form-control">
+                    <select name="selectNM" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectednivelmotivacao ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectRI" class="form-control">
+                    <select name="selectRI" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedrelacionamentointerpesssoal ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectMC" class="form-control">
+                    <select name="selectMC" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedmedcontinuo ?>>Apto</option>
                     </select>
                   </td>
                   <td>
-                    <select name="selectSE" class="form-control">
+                    <select name="selectSE" class="form-control form-control-lg">
                       <option value = 0 >Inapto</option>
                       <option value = 1 <?php echo $selectedsubstanciasintorpecentes ?>>Apto</option>
                     </select>
@@ -182,7 +182,7 @@ hr {
 
               if ($CandidatoAtualizado) { ?>
                 <script language='javascript' type='text/javascript'>
-                alert('Inscricao Atualizada!');
+                alert('Inscrição Atualizada!');
                 </script>
 
               <?php } else { ?>
