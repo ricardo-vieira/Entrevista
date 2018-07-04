@@ -203,7 +203,7 @@ hr {
           if ($IDUsuario == -1) {?>
             <div class="form">
               <label for="cidade">Cidade:</label>
-              <select class="form" style="width:200px" name="cidade">
+              <select class="form" style="width:200px" name="selectFiltroCidade">
                 <option value="Altamira">  Altamira </option>
                 <option value="Belem">     Belém    </option>
                 <option value="Castanhal"> Castanhal</option>
@@ -220,7 +220,7 @@ hr {
           <table class="table table-striped" style="width:100%">
             <thead>
               <tr>
-                <th scope="col" style="text-align: center; width:15%">Nome</th>
+                <th scope="col" style="text-align: center; width:20%">Nome</th>
                 <th scope="col" style="text-align: center">Inscrição</th>
                 <th scope="col" style="text-align: center">CPF</th>
                 <th scope="col" style="text-align: center">Cidade</th>
@@ -235,20 +235,25 @@ hr {
                 <th scope="col" style="text-align: center">Substâncias Entorpecentes</th>
 
                 <?php if ($IDUsuario == -1) {?>
-                  <th scope="col" style="text-align: center">Psicologo</th>
+                  <th scope="col" style="text-align: center; width:10%">Entrevistador</th>
                   <th scope="col" style="text-align: center">Resultado</th>
                 <?php }?>
               </tr>
             </thead>
             <tbody>
               <?php
-              if (isset ($_POST["btnPesquisarCidade"])) {
-                $Cidade = $_POST["cidade"];
-                $arrayCandidatos = listarcandidatoCidade($Cidade);
+
+              //Parametros de filtragem;
+              $filtroCidade = "";
+              $filtroIdUsuario = $IDUsuario;
+
+              if (isset ($_POST["btnPesquisarCidade"]))
+              {
+                $filtroCidade = $_POST["selectFiltroCidade"];
               }
-              else {
-                $arrayCandidatos = listarcandidato($IDUsuario);
-              }
+
+              $arrayCandidatos = listarCandidatos($filtroCidade, $filtroIdUsuario);
+
               foreach ($arrayCandidatos as $itemcandidato)
               {
                 $organizapensamento  					= ($itemcandidato['ORGANIZAPENSAMENTO']==1)?("Apto"):("Inapto");
@@ -279,7 +284,7 @@ hr {
                   <td style="text-align: center"><?php echo $substanciasintorpecentes ?></td>
 
                   <?php if ($IDUsuario == -1)	{ ?>
-                    <td style="text-align: center"><?php echo "Vai Aqui o Psicologo" ?></td>
+                    <td style="text-align: center"><?php echo $itemcandidato['NOMEENTREVISTADOR'] ?></td>
                     <td style="text-align: center"><?php echo $aprovado ?></td>
                   <?php } ?>
                 </tr>
