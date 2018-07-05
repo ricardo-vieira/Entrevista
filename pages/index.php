@@ -1,6 +1,8 @@
 <?php
   session_unset();
-  session_destroy();
+  if (isset($_SESSION)){
+    session_destroy();
+  }
   session_start();
 
   require_once '../dao/DAOUsuarios.php';
