@@ -1,7 +1,25 @@
 <?php
-require_once '../dao/DAOCandidatos.php';
-require_once '../dao/DAOUsuarios.php';
-$IDUsuario = $_COOKIE["ID"];
+  session_start();
+  require_once '../dao/DAOCandidatos.php';
+  require_once '../dao/DAOUsuarios.php';
+  $IDUsuario = $_COOKIE["ID"];
+
+  //Valores padão dos filtros
+  $filtroCidade = isset($_SESSION['filtroCidade']) ? $_SESSION['filtroCidade'] : "";
+  $filtroEntrevistador = isset($_SESSION['filtroEntrevistador']) ? $_SESSION['filtroEntrevistador'] : -1;
+
+  if (isset ($_POST["btnFiltroPesquisar"])){
+    //usados como parâmetro para o método listarcandidatos;
+    $filtroCidade        = $_POST["selectFiltroCidade"];
+    $filtroEntrevistador = $_POST['selectFiltroEntrevistador'];
+
+    //usados para controlar os filtros;
+    unset($_SESSION['filtroCidade']);
+    unset($_SESSION['filtroEntrevistador']);
+    $_SESSION['filtroCidade']        = $_POST["selectFiltroCidade"];;
+    $_SESSION['filtroEntrevistador'] = $_POST['selectFiltroEntrevistador'];
+  }
+
 ?>
 <html>
 <head>
@@ -84,15 +102,15 @@ hr {
                 <tbody>
 
                   <?php
-                  $selectedorganizapensamento  = ($CandidatoEditar['ORGANIZAPENSAMENTO']==1)?("selected"):("");
-                  $selectedclarezaresposta  = ($CandidatoEditar['CLAREZARESPOSTA']==1)?("selected"):("");
-                  $selectedfacilexpressao  = ($CandidatoEditar['FACILEXPRESSAO']==1)?("selected"):("");
-                  $selectedausenciagagueira = ($CandidatoEditar['AUSENGAGUEIRA']==1)?("selected"):("");
-                  $selectedvidaegressa = ($CandidatoEditar['VIDAEGRESSA']==1)?("selected"):("");
-                  $selectednivelmotivacao = ($CandidatoEditar['NIVELMOTIVACAO']==1)?("selected"):("");
+                  $selectedorganizapensamento           = ($CandidatoEditar['ORGANIZAPENSAMENTO']==1)?("selected"):("");
+                  $selectedclarezaresposta              = ($CandidatoEditar['CLAREZARESPOSTA']==1)?("selected"):("");
+                  $selectedfacilexpressao               = ($CandidatoEditar['FACILEXPRESSAO']==1)?("selected"):("");
+                  $selectedausenciagagueira             = ($CandidatoEditar['AUSENGAGUEIRA']==1)?("selected"):("");
+                  $selectedvidaegressa                  = ($CandidatoEditar['VIDAEGRESSA']==1)?("selected"):("");
+                  $selectednivelmotivacao               = ($CandidatoEditar['NIVELMOTIVACAO']==1)?("selected"):("");
                   $selectedrelacionamentointerpesssoal  = ($CandidatoEditar['RELACIONAMENTOINTERPESSOAL']==1)?("selected"):("");
-                  $selectedmedcontinuo  = ($CandidatoEditar['MEDCONTINUO']==1)?("selected"):("");
-                  $selectedsubstanciasintorpecentes  = ($CandidatoEditar['SUBSTANCIASINTORPECENTES']==1)?("selected"):("");
+                  $selectedmedcontinuo                  = ($CandidatoEditar['MEDCONTINUO']==1)?("selected"):("");
+                  $selectedsubstanciasintorpecentes     = ($CandidatoEditar['SUBSTANCIASINTORPECENTES']==1)?("selected"):("");
 
                   ?>
 
@@ -200,18 +218,20 @@ hr {
           <hr>
           <h1 class="certertittlescand"><CENTER>Candidatos Editados</CENTER></h1>
           <?php
-          if ($IDUsuario == -1) {?>
+          if ($IDUsuario == -1) {
+
+            ?>
             <div class="form">
               <label for="cidade">Cidade:</label>
 
               <select class="form" style="width:200px" name="selectFiltroCidade">
-                <option value="">  Todas </option>
-                <option value="Altamira">  Altamira </option>
-                <option value="Belem">     Belém    </option>
-                <option value="Castanhal"> Castanhal</option>
-                <option value="Itaituba">  Itaituba </option>
-                <option value="Maraba">    Marabá   </option>
-                <option value="Santarem">  Santarém </option>
+                <option value="" <?php echo (isset($_SESSION["filtroCidade"]) && $_SESSION["filtroCidade"] == "") ? "selected" : "" ?>>Todas</option>
+                <option value="Altamira"  <?php echo (isset($_SESSION["filtroCidade"]) && $_SESSION["filtroCidade"] == "Altamira") ? "selected" : "" ?>>Altamira</option>
+                <option value="Belem"     <?php echo (isset($_SESSION["filtroCidade"]) && $_SESSION["filtroCidade"] == "Belem") ? "selected" : "" ?>>Belém</option>
+                <option value="Castanhal" <?php echo (isset($_SESSION["filtroCidade"]) && $_SESSION["filtroCidade"] == "Castanhal") ? "selected" : "" ?>>Castanhal</option>
+                <option value="Itaituba"  <?php echo (isset($_SESSION["filtroCidade"]) && $_SESSION["filtroCidade"] == "Itaituba") ? "selected" : "" ?>>Itaituba</option>
+                <option value="Maraba"    <?php echo (isset($_SESSION["filtroCidade"]) && $_SESSION["filtroCidade"] == "Maraba") ? "selected" : "" ?>>Marabá</option>
+                <option value="Santarem"  <?php echo (isset($_SESSION["filtroCidade"]) && $_SESSION["filtroCidade"] == "Santarem") ? "selected" : "" ?>>Santarém</option>
               </select>
 
               <label for="cidade">Entrevistador:</label>
@@ -221,7 +241,7 @@ hr {
                 <?php
                 $arrayEntrevistadores = listarEntrevistadores();
                 foreach ($arrayEntrevistadores as $itementrevistador) { ?>
-                  <option value=<?php echo $itementrevistador['ID'] ?>><?php echo $itementrevistador['NOME'] ?></option>
+                  <option value=<?php echo $itementrevistador['ID'] ?> <?php echo (isset($_SESSION["filtroEntrevistador"]) && $_SESSION["filtroEntrevistador"] == $itementrevistador['ID']) ? "selected"  : "" ?>><?php echo $itementrevistador['NOME'] ?></option>
                 <?php } ?>
               </select>
               <input type="submit" name="btnFiltroPesquisar" class="btn btn-primary btn-lg" value="Pesquisar"/>
@@ -249,22 +269,13 @@ hr {
 
                 <?php if ($IDUsuario == -1) {?>
                   <th scope="col" style="text-align: center; width:10%">Entrevistador</th>
+                  <th scope="col" style="text-align: center; width:25%">Data Atendimento</th>
                   <th scope="col" style="text-align: center">Resultado</th>
                 <?php }?>
               </tr>
             </thead>
             <tbody>
               <?php
-
-              //Parametros de filtragem;
-              $filtroCidade = "";
-              $filtroEntrevistador = $IDUsuario;
-
-              if (isset ($_POST["btnFiltroPesquisar"]))
-              {
-                $filtroCidade        = $_POST["selectFiltroCidade"];
-                $filtroEntrevistador = $_POST['selectFiltroEntrevistador'];
-              }
 
               $arrayCandidatos = listarCandidatos($filtroCidade, $filtroEntrevistador);
 
@@ -299,6 +310,7 @@ hr {
 
                   <?php if ($IDUsuario == -1)	{ ?>
                     <td style="text-align: center"><?php echo $itemcandidato['NOMEENTREVISTADOR'] ?></td>
+                    <td style="text-align: center"><?php echo $itemcandidato['data']." ".$itemcandidato['horario'] ?></td>
                     <td style="text-align: center"><?php echo $aprovado ?></td>
                   <?php } ?>
                 </tr>
