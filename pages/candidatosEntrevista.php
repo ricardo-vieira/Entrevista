@@ -300,11 +300,11 @@ hr {
                   <td style="text-align: center"><?php echo $organizapensamento ?></td>
                   <td style="text-align: center"><?php echo $clarezaresposta ?></td>
                   <td style="text-align: center"><?php echo $facilexpressao ?></td>
-                  <td style="text-align: center"><?php echo $vidaegressa ?></td>
                   <td style="text-align: center"><?php echo $ausenciagagueira ?></td>
+                  <td style="text-align: center"><?php echo $vidaegressa ?></td>
                   <td style="text-align: center"><?php echo $nivelmotivacao ?></td>
-                  <td style="text-align: center"><?php echo $medcontinuo ?></td>
                   <td style="text-align: center"><?php echo $relacionamentointerpesssoal ?></td>
+                  <td style="text-align: center"><?php echo $medcontinuo ?></td>
                   <td style="text-align: center"><?php echo $substanciasintorpecentes ?></td>
 
                   <?php if ($IDUsuario == -1)	{ ?>
