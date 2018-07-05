@@ -100,7 +100,6 @@ hr {
                   </tr>
                 </thead>
                 <tbody>
-
                   <?php
                   $selectedorganizapensamento           = ($CandidatoEditar['ORGANIZAPENSAMENTO']==1)?("selected"):("");
                   $selectedclarezaresposta              = ($CandidatoEditar['CLAREZARESPOSTA']==1)?("selected"):("");
