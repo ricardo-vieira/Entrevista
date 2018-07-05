@@ -229,11 +229,49 @@ function atualizarCandidato($id, $organizapensamento, $clarezaresposta, $facilex
 
 function DefinirResultado ($organizapensamento, $clarezaresposta, $facilexpressao,
                            $ausenciagagueira, $vidaegressa, $nivelmotivacao, $relacionamentointerpesssoal,
-                           $medcontinuo, $substanciasintorpecentes) {
-  if ((!$ausenciagagueira) || (!$substanciasintorpecentes)) {
-    return false;
+                           $medcontinuo, $substanciasintorpecentes)
+{
+
+  if ($ausenciagagueira <= 0){
+    return 0;
   }
-  return true;
+
+  $totalPontosReprovado = 0;
+
+  if ($organizapensamento <= 0){
+    $totalPontosReprovado++;
+  }
+
+  if ($clarezaresposta <= 0){
+    $totalPontosReprovado++;
+  }
+
+  if ($facilexpressao <= 0){
+    $totalPontosReprovado++;
+  }
+
+  if ($vidaegressa <= 0){
+    $totalPontosReprovado++;
+  }
+
+  if ($nivelmotivacao <= 0){
+    $totalPontosReprovado++;
+  }
+
+
+  if ($relacionamentointerpesssoal <= 0){
+    $totalPontosReprovado++;
+  }
+
+  if ($medcontinuo <= 0){
+    $totalPontosReprovado++;
+  }
+
+  if ($substanciasintorpecentes <= 0){
+    $totalPontosReprovado++;
+  }
+
+  return ($totalPontosReprovado > 4) ? 0 : 1;
 }
 
 function excluirCandidatos($id)

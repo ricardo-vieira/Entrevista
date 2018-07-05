@@ -1,4 +1,8 @@
 <?php
+  session_unset();
+  session_destroy();
+  session_start();
+
   require_once '../dao/DAOUsuarios.php';
       $ArrayUsuarios = encontraUsuarios($_POST['txtUsuario'], $_POST['txtSenha']);
 
