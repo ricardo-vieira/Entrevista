@@ -6,7 +6,7 @@
 
   //Valores padão dos filtros
   $filtroCidade = isset($_SESSION['filtroCidade']) ? $_SESSION['filtroCidade'] : "";
-  $filtroEntrevistador = isset($_SESSION['filtroEntrevistador']) ? $_SESSION['filtroEntrevistador'] : -1;
+  $filtroEntrevistador = isset($_SESSION['filtroEntrevistador']) && $IDUsuario==-1 ? $_SESSION['filtroEntrevistador'] : $IDUsuario;
 
   if (isset ($_POST["btnFiltroPesquisar"])){
     //usados como parâmetro para o método listarcandidatos;
@@ -92,9 +92,9 @@ hr {
                     <th scope="col" style="text-align: center; width: 7.25%">Organização do Pensamento</th>
                     <th scope="col" style="text-align: center; width: 7.25%">Clareza de Resposta</th>
                     <th scope="col" style="text-align: center; width: 7.25%">Facilidade de Expressão</th>
-                    <th scope="col" style="text-align: center; width: 7.25%">Ausencia de Gagueira</th>
+                    <th scope="col" style="text-align: center; width: 7.25%">Ausência de Gagueira</th>
                     <th scope="col" style="text-align: center; width: 7.25%">Vida Egressa</th>
-                    <th scope="col" style="text-align: center; width: 7.25%">Nivel de Motivação</th>
+                    <th scope="col" style="text-align: center; width: 7.25%">Nível de Motivação</th>
                     <th scope="col" style="text-align: center; width: 7.25%">Relacionamento Interpessoal</th>
                     <th scope="col" style="text-align: center; width: 7.25%">Medicamento de Uso Contínuo</th>
                     <th scope="col" style="text-align: center; width: 7.25%">Substâncias Entorpecentes</th>
@@ -218,6 +218,7 @@ hr {
           <hr>
           <h1 class="certertittlescand"><CENTER>Candidatos Editados</CENTER></h1>
           <?php
+
           if ($IDUsuario == -1) {
 
             ?>
@@ -260,9 +261,9 @@ hr {
                 <th scope="col" style="text-align: center">Organização do Pensamento</th>
                 <th scope="col" style="text-align: center">Clareza de Resposta</th>
                 <th scope="col" style="text-align: center">Facilidade de Expressão</th>
-                <th scope="col" style="text-align: center">Ausencia de Gagueira</th>
+                <th scope="col" style="text-align: center">Ausência de Gagueira</th>
                 <th scope="col" style="text-align: center">Vida Egressa</th>
-                <th scope="col" style="text-align: center">Nivel de Motivação</th>
+                <th scope="col" style="text-align: center">Nível de Motivação</th>
                 <th scope="col" style="text-align: center">Relacionamento Interpessoal</th>
                 <th scope="col" style="text-align: center">Medicamento de Uso Contínuo</th>
                 <th scope="col" style="text-align: center">Substâncias Entorpecentes</th>

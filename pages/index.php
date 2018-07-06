@@ -1,6 +1,6 @@
 <?php
-  session_unset();
   if (isset($_SESSION)){
+    unset($_SESSION);
     session_destroy();
   }
   session_start();
