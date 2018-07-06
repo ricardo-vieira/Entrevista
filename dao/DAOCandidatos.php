@@ -109,7 +109,6 @@ function unicoCandidato($id)
 function CandidatoInscricao($Usuario, $Inscricao)
 {
     $pdo = conectar();
-
     try
     {
         IF ($Usuario == -1) {

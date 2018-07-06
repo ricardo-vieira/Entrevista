@@ -6,7 +6,7 @@
 
   //Valores padão dos filtros
   $filtroCidade = isset($_SESSION['filtroCidade']) ? $_SESSION['filtroCidade'] : "";
-  $filtroEntrevistador = isset($_SESSION['filtroEntrevistador']) ? $_SESSION['filtroEntrevistador'] : -1;
+  $filtroEntrevistador = isset($_SESSION['filtroEntrevistador']) && $IDUsuario==-1 ? $_SESSION['filtroEntrevistador'] : $IDUsuario;
 
   if (isset ($_POST["btnFiltroPesquisar"])){
     //usados como parâmetro para o método listarcandidatos;
@@ -218,6 +218,7 @@ hr {
           <hr>
           <h1 class="certertittlescand"><CENTER>Candidatos Editados</CENTER></h1>
           <?php
+
           if ($IDUsuario == -1) {
 
             ?>
