@@ -101,7 +101,7 @@ if (isset($_GET["codigo"]) && !isset($_GET["Inclusao"]))
 
 			<div id="divlista" class="container">
 				<a <?php echo ($edicaousuario || $inclusaousuario) ? "" : 'href="?Inclusao"' ?> class="btn btn-info" onclick="<?php echo ($edicaousuario || $inclusaousuario) ? "cancelaredicaousuario('Inclusao')" : "" ?>">Incluir</a>
-				<input type="button" class="btn btn-info" onclick="<?php echo ($edicaousuario || $inclusaousuario) ? "cancelaredicaousuario('voltar')" : "" ?>" value="Voltar"/>
+				<a <?php echo ($edicaousuario || $inclusaousuario) ? "" : 'href="bemvindofull.php"' ?> type="button" class="btn btn-info" onclick="<?php echo ($edicaousuario || $inclusaousuario) ? "cancelaredicaousuario('voltar')" : "" ?>">Voltar</a>
 				<br><br>
 
 				<table class="table table-striped" style="width: 100%">
