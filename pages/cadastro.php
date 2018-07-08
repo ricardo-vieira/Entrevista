@@ -1,5 +1,4 @@
-<?php
-require_once '../dao/DAOUsuarios.php';
+<?php require_once '../dao/DAOUsuarios.php';
 
 
 //valida os campos para a inclusao ou edicao das informacoes
@@ -8,7 +7,7 @@ $_POST['txtUsuario'] == null) ||
 ($_POST['txtSenha'] == "" || $_POST['txtSenha'] == null)) { ?>
 
   <script language='javascript' type='text/javascript'>
-  alert('Os campos login, senha e nome devem ser preenchidos');window.location.href='cadastro.html';
+  alert('Os campos login, senha e nome devem ser preenchidos');window.location.href='usuarios.php';
   </script>
 
   <?php die();} /* fim do if(($_POST['txtUsuario'] == "" || $_POST['txtUsuario'] == null) || ($_POST['txtSenha'] == "" || $_POST['txtSenha'] == null)) */
@@ -45,12 +44,14 @@ $_POST['txtUsuario'] == null) ||
                                            $usuariocrp,
                                            $usuariocpf);
 
-      if ($resultadousuario){?>
+
+      if ($resultadousuario == true){?>
 
         <script language='javascript' type='text/javascript'>
         alert('Usuário atualizado com sucesso!');
         window.location.href='usuarios.php';
         </script>
+
         <?php} else{ ?>
 
           <script language='javascript' type='text/javascript'>
