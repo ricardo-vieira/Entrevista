@@ -62,7 +62,7 @@ $_POST['txtUsuario'] == null) ||
           <?php }
         die();
       }
-    }
+    } // fim do if (isset($_POST["hdusuarioedicao"]))
 
     //caso nao for uma edicao sera entao uma inclusao.
     //verifica se existe um usuario com o mesmo login e senha
