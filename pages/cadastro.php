@@ -52,15 +52,14 @@ $_POST['txtUsuario'] == null) ||
         window.location.href='usuarios.php';
         </script>
 
-        <?php} else{ ?>
+        <?php } else{ ?>
 
           <script language='javascript' type='text/javascript'>
           alert('Não foi possível atualizar esse usuário');
           window.location.href='usuarios.php';
           </script>
 
-          <?php
-        }
+          <?php }
         die();
       }
     }
