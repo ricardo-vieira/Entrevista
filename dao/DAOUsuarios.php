@@ -52,39 +52,50 @@ function inserirUsuario($nome, $usuario, $senha, $telefone, $email, $crp, $cpf)
         $queryinserir->bindValue(7, $cpf);
         $queryinserir->execute();
 
-        if ($queryinserir->rowCount() > 0):
-                return true;
-        else:
-                return false;
-        endif;
+        if ($queryinserir->rowCount() > 0){
+          return true;
+
+        }else{
+          return false;
+
+        }
+
     } catch (Exception $ex) {
         echo "Erro: " . $ex->getMessage();
     }
 }
 
-function atualizarUsuario($id, $nome, $usuario, $senha,$telefone, $email, $crp, $cpf, $adm)
+function atualizarUsuario($id, $nome, $usuario, $senha,$telefone, $email, $crp, $cpf)
 {
     $pdo = conectar();
 
     try
     {
-        $queryatualizar = $pdo->prepare("UPDATE usuarios SET nome = ?, usuario = ?, senha = ?, adm = ?, telefone = ?, email = ?, crp = ?, cpf = ? WHERE id = ?");
-        $queryatualizar->bindValue(1, $nome);
-        $queryatualizar->bindValue(2, $usuario);
-        $queryatualizar->bindValue(3, $senha);
-        $queryatualizar->bindValue(4, $adm);
-        $queryatualizar->bindValue(5, $telefone);
-        $queryatualizar->bindValue(6, $email);
-        $queryatualizar->bindValue(7, $crp);
-        $queryatualizar->bindValue(8, $cpf);
-        $queryatualizar->bindValue(9, $id);
+        $queryatualizar = $pdo->prepare("UPDATE usuarios SET nome = :nome, "
+                                                             ."usuario = :usuario, "
+                                                             ."senha = :senha, "
+                                                             ."telefone = :telefone, "
+                                                             ."email = :email, "
+                                                             ."crp = :crp, "
+                                                             ."cpf = :cpf "
+                                        ."WHERE id = :id");
+
+        $queryatualizar->bindValue(":nome", $nome);
+        $queryatualizar->bindValue(":usuario", $usuario);
+        $queryatualizar->bindValue(":senha", $senha);
+        $queryatualizar->bindValue(":telefone", $telefone);
+        $queryatualizar->bindValue(":email", $email);
+        $queryatualizar->bindValue(":crp", $crp);
+        $queryatualizar->bindValue(":cpf", $cpf);
+        $queryatualizar->bindValue(":id", $id);
+
         $queryatualizar->execute();
 
-        if ($queryatualizar->rowCount() > 0):
+        if ($queryatualizar->rowCount() > 0)
                 return true;
-        else:
+        else
                 return false;
-        endif;
+
     } catch (Exception $ex) {
         echo "Erro: " . $ex->getMessage();
     }
