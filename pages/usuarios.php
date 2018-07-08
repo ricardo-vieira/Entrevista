@@ -87,8 +87,10 @@ if (isset($_GET["codigo"]) && !isset($_GET["Inclusao"]))
 					function cancelaredicaousuario(proximoregistro){
 						var resposta = confirm("Deseja realmente cancelar <?php echo ($edicaousuario) ? "a edicao do usuario ".$usuarioedicao["USUARIO"] : "inclusao do usuario" ?> ?");
 
-						if (resposta == true)
-						{
+						if (proximoregistro == 'voltar'){
+							window.location.href= "bemvindofull.php";
+						}
+						else if (resposta == true){
 							window.location.href= "usuarios.php".concat(proximoregistro != undefined ? "?".concat(proximoregistro) : "");
 						}
 						return;
@@ -98,7 +100,8 @@ if (isset($_GET["codigo"]) && !isset($_GET["Inclusao"]))
 			<?php } // fim do if ($usuarioedicao)?>
 
 			<div id="divlista" class="container">
-				<a href="?Inclusao" class="btn btn-info" onclick="<?php echo ($edicaousuario || $inclusaousuario) ? "cancelaredicaousuario()" : "" ?>">Incluir</a>
+				<a <?php echo ($edicaousuario || $inclusaousuario) ? "" : 'href="?Inclusao"' ?> class="btn btn-info" onclick="<?php echo ($edicaousuario || $inclusaousuario) ? "cancelaredicaousuario('Inclusao')" : "" ?>">Incluir</a>
+				<a <?php echo ($edicaousuario || $inclusaousuario) ? "" : 'href="bemvindofull.php"' ?> type="button" class="btn btn-info" onclick="<?php echo ($edicaousuario || $inclusaousuario) ? "cancelaredicaousuario('voltar')" : "" ?>">Voltar</a>
 				<br><br>
 
 				<table class="table table-striped" style="width: 100%">
