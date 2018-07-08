@@ -71,30 +71,28 @@ function atualizarUsuario($id, $nome, $usuario, $senha,$telefone, $email, $crp, 
 
     try
     {
-        $queryatualizar = $pdo->prepare("UPDATE usuarios SET nome = :nome, "
-                                                             ."usuario = :usuario, "
-                                                             ."senha = :senha, "
-                                                             ."telefone = :telefone, "
-                                                             ."email = :email, "
-                                                             ."crp = :crp, "
-                                                             ."cpf = :cpf "
-                                        ."WHERE id = :id");
+        $queryatualizar = $pdo->prepare("UPDATE usuarios SET NOME = :nome, "
+                                                            ."USUARIO = :usuario, "
+                                                            ."SENHA = :senha, "
+                                                            ."telefone = :telefone, "
+                                                            ."email = :email, "
+                                                            ."crp = :crp, "
+                                                            ."cpf = :cpf "
+                                        ."WHERE ID = :id");
 
-        $queryatualizar->bindValue(":nome", $nome);
-        $queryatualizar->bindValue(":usuario", $usuario);
-        $queryatualizar->bindValue(":senha", $senha);
-        $queryatualizar->bindValue(":telefone", $telefone);
-        $queryatualizar->bindValue(":email", $email);
-        $queryatualizar->bindValue(":crp", $crp);
-        $queryatualizar->bindValue(":cpf", $cpf);
-        $queryatualizar->bindValue(":id", $id);
+        $queryatualizar->bindValue(":nome", $nome, PDO::PARAM_STR);
+        $queryatualizar->bindValue(":usuario", $usuario, PDO::PARAM_STR);
+        $queryatualizar->bindValue(":senha", $senha, PDO::PARAM_STR);
+        $queryatualizar->bindValue(":telefone", $telefone, PDO::PARAM_STR);
+        $queryatualizar->bindValue(":email", $email, PDO::PARAM_STR);
+        $queryatualizar->bindValue(":crp", $crp, PDO::PARAM_STR);
+        $queryatualizar->bindValue(":cpf", $cpf, PDO::PARAM_STR);
+        $queryatualizar->bindValue(":id", $id, PDO::PARAM_INT);
 
         $queryatualizar->execute();
 
-        if ($queryatualizar->rowCount() > 0)
-                return true;
-        else
-                return false;
+
+        return true;
 
     } catch (Exception $ex) {
         echo "Erro: " . $ex->getMessage();

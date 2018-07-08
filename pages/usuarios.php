@@ -80,7 +80,7 @@ if (isset($_GET["codigo"]) && !isset($_GET["Inclusao"]))
 					<input type="button" class="btn btn-primary btn-lg btn-block" onclick="cancelaredicaousuario()" value="Cancelar"></a>
 
 					<?php if ($edicaousuario){?>
-					<input type="hidden" name="hdusuarioedicao" value=<?php echo $usuarioedicao["ID"] ?> />;
+					<input type="hidden" name="hdusuarioedicao" value=<?php echo $usuarioedicao["ID"] ?> />
 					<?php } // fim if ($edicaousuario) ?>
 
 					<script type="text/javascript">
@@ -89,7 +89,7 @@ if (isset($_GET["codigo"]) && !isset($_GET["Inclusao"]))
 
 						if (resposta == true)
 						{
-							window.location.href= "usuarios.php".concat(proximoregistro != NULL ? "?".concat(proximoregistro) : "");
+							window.location.href= "usuarios.php".concat(proximoregistro != "undefined" ? "?".concat(proximoregistro) : "");
 						}
 						return;
 					}
