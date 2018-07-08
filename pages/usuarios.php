@@ -89,7 +89,7 @@ if (isset($_GET["codigo"]) && !isset($_GET["Inclusao"]))
 
 						if (resposta == true)
 						{
-							window.location.href= "usuarios.php".concat(proximoregistro != "undefined" ? "?".concat(proximoregistro) : "");
+							window.location.href= "usuarios.php".concat(proximoregistro != undefined ? "?".concat(proximoregistro) : "");
 						}
 						return;
 					}
